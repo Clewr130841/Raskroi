@@ -63,7 +63,7 @@ namespace Raskroi.Calculators.MaterialRequirements
             var requirements = new List<LinearMaterialRequirement>();
 
             //Фигура может быть повернута
-            var rotation = Matrix3x2.CreateRotation(-context.Angle, bBoxCenter);
+            var rotation = Matrix3x2.CreateRotation(context.Angle, bBoxCenter);
 
             for (var i = 0; i < minMaxHeightMap.Length; i++)
             {
@@ -87,7 +87,7 @@ namespace Raskroi.Calculators.MaterialRequirements
                         new Vector2(minX, maxY)
                     );
 
-                    if (context.Angle == 0) //Небольшая оптимизация
+                    if (context.Angle != 0) //Небольшая оптимизация
                     {
                         polygon = polygon.Transform(rotation);
                     }
