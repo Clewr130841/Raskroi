@@ -26,7 +26,13 @@ namespace Raskroi
             var requirements = alg.CalcMaterialRequirements(wall, context);
 
             var bbox = wall.GetBoundingBox();
-            var renderer = new SvgRenderer(bbox.Width + MathF.Abs(bbox.TopLeft.X), bbox.Height + MathF.Abs(bbox.TopLeft.Y), -bbox.TopLeft.X, -bbox.TopLeft.Y);
+            
+            var screenWidth = bbox.Width + MathF.Abs(bbox.TopLeft.X) + sourceMaterialSize.Width;
+            var screenHeight = bbox.Height + MathF.Abs(bbox.TopLeft.Y) + sourceMaterialSize.Width;
+
+            var hOffset = sourceMaterialSize.Width / 2f;
+
+            var renderer = new SvgRenderer(screenWidth, screenHeight, -bbox.TopLeft.X + hOffset, -bbox.TopLeft.Y + hOffset);
 
             renderer.Draw(Color.Green, wall);
             foreach (var requirement in requirements)
